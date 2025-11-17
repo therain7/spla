@@ -51,6 +51,9 @@
 #define VENDOR_CODE_AMD    "amd"
 #define VENDOR_CODE_IMG    "img"
 
+#define SPLA_OPENCL_PLATFORM "SPLA_OPENCL_PLATFORM"
+#define SPLA_OPENCL_DEVICE   "SPLA_OPENCL_DEVICE"
+
 namespace spla {
 
     /**

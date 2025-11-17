@@ -30,6 +30,8 @@
 #define CL_HPP_MINIMUM_OPENCL_VERSION 120
 #define CL_HPP_TARGET_OPENCL_VERSION  120
 #define CL_HPP_ENABLE_EXCEPTIONS
+#define SPLA_OPENCL_PLATFORM "SPLA_OPENCL_PLATFORM"
+#define SPLA_OPENCL_DEVICE   "SPLA_OPENCL_DEVICE"
 #include <CL/opencl.hpp>
 
 #include <algorithm>
@@ -412,7 +414,14 @@ void cl_merge_v2(const cl::CommandQueue& queue,
 TEST(opencl_merge, merge_path_v1) {
     std::vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
-    cl::Platform platform = platforms.back();
+    if (platforms.empty()) {
+        GTEST_SKIP() << "No platforms found";
+    }
+
+    const char* spla_opencl_platform = std::getenv(SPLA_OPENCL_PLATFORM);
+    int         platform_index       = (spla_opencl_platform ? std::atoi(spla_opencl_platform) : 0);
+
+    cl::Platform platform = platforms[platform_index];
 
     std::cout << "Platforms: " << std::endl;
     for (auto& it : platforms) {
@@ -423,7 +432,13 @@ TEST(opencl_merge, merge_path_v1) {
 
     std::vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
-    cl::Device device = devices[0];
+    if (devices.empty()) {
+        GTEST_SKIP() << "No devices found";
+    }
+
+    const char* spla_opencl_device = std::getenv(SPLA_OPENCL_DEVICE);
+    int         device_index       = (spla_opencl_device ? std::atoi(spla_opencl_device) : 0);
+    cl::Device  device             = devices[device_index];
 
     std::cout << "Devices: " << std::endl;
     for (auto& it : devices) {
@@ -502,7 +517,14 @@ TEST(opencl_merge, merge_path_v1) {
 TEST(opencl_merge, merge_path_v2) {
     std::vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
-    cl::Platform platform = platforms.back();
+    if (platforms.empty()) {
+        GTEST_SKIP() << "No platforms found";
+    }
+
+    const char* spla_opencl_platform = std::getenv(SPLA_OPENCL_PLATFORM);
+    int         platform_index       = (spla_opencl_platform ? std::atoi(spla_opencl_platform) : 0);
+
+    cl::Platform platform = platforms[platform_index];
 
     std::cout << "Platforms: " << std::endl;
     for (auto& it : platforms) {
@@ -513,7 +535,13 @@ TEST(opencl_merge, merge_path_v2) {
 
     std::vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
-    cl::Device device = devices[0];
+    if (devices.empty()) {
+        GTEST_SKIP() << "No devices found";
+    }
+
+    const char* spla_opencl_device = std::getenv(SPLA_OPENCL_DEVICE);
+    int         device_index       = (spla_opencl_device ? std::atoi(spla_opencl_device) : 0);
+    cl::Device  device             = devices[device_index];
 
     std::cout << "Devices: " << std::endl;
     for (auto& it : devices) {
