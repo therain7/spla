@@ -30,6 +30,7 @@
 #include <core/registry.hpp>
 #include <core/top.hpp>
 
+#include <opencl/cl_m_extract_row.hpp>
 #include <opencl/cl_m_reduce.hpp>
 #include <opencl/cl_mxmT_masked.hpp>
 #include <opencl/cl_mxv.hpp>
@@ -93,6 +94,11 @@ namespace spla {
         g_registry->add(MAKE_KEY_CL_0("mxmT_masked", INT), std::make_shared<Algo_mxmT_masked_cl<T_INT>>());
         g_registry->add(MAKE_KEY_CL_0("mxmT_masked", UINT), std::make_shared<Algo_mxmT_masked_cl<T_UINT>>());
         g_registry->add(MAKE_KEY_CL_0("mxmT_masked", FLOAT), std::make_shared<Algo_mxmT_masked_cl<T_FLOAT>>());
+
+        // algorthm m_extract_row
+        g_registry->add(MAKE_KEY_CL_0("m_extract_row", INT), std::make_shared<Algo_m_extract_row_cl<T_INT>>());
+        g_registry->add(MAKE_KEY_CL_0("m_extract_row", UINT), std::make_shared<Algo_m_extract_row_cl<T_UINT>>());
+        g_registry->add(MAKE_KEY_CL_0("m_extract_row", FLOAT), std::make_shared<Algo_m_extract_row_cl<T_FLOAT>>());
     }
 
 }// namespace spla
